@@ -1,6 +1,9 @@
 package com.jmark.utils;
 
-import java.awt.*;
+import org.fest.swing.core.BasicRobot;
+import org.fest.swing.core.ComponentFinder;
+import org.fest.swing.core.Robot;
+
 import java.io.File;
 
 /**

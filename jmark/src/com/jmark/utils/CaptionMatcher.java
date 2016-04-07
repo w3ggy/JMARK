@@ -1,5 +1,7 @@
 package com.jmark.utils;
 
+import org.fest.swing.core.ComponentMatcher;
+
 import java.awt.*;
 
 /**
