@@ -19,7 +19,8 @@ public class CaptionMatcher implements ComponentMatcher {
 
     @Override
     public boolean matches(Component comp) {
-        if (comp != null && SwingTypes.containsType(comp.getClass().getSimpleName()) && caption.equals(comp.getName())) {
+//        if (comp != null && SwingTypes.containsType(comp.getClass().getSimpleName()) && caption.equals(comp.getName())) {
+        if (comp != null && SwingTypes.containsType(comp.getClass().getSimpleName()) && caption.equals(FindComponentName.getComponentVariableName(comp))) {
             return true;
         }
         return false;
