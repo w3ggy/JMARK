@@ -2,12 +2,14 @@ package com.jmark.utils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by Artyom on 08.04.2016.
  */
 public class ActionWithComponent {
-    public void actionWithComponent(Component component, String type) {
+    public void actionWithComponent(Component component, String type, List<JPanel> list, int index) {
         switch (type) {
             case "JButton":
                 switch (((JComboBox)list.get(index).getComponent(1)).getSelectedItem().toString()) {
@@ -18,21 +20,18 @@ public class ActionWithComponent {
                         if((((JTextField)list.get(index).getComponent(3)).getText().compareToIgnoreCase("true") == 0 && ((JButton)component).isEnabled() == true) || (((JTextField)list.get(index).getComponent(3)).getText().compareToIgnoreCase("false") == 0 && ((JButton)component).isEnabled() == false)) {
                             // правда
                             System.out.println("Правда");
-                            makeLabel(((JTextField)list.get(index).getComponent(2)).getText() + " : " + ((JTextField)list.get(index).getComponent(3)).getText(), true);
+//                            makeLabel(((JTextField)list.get(index).getComponent(2)).getText() + " : " + ((JTextField)list.get(index).getComponent(3)).getText(), true);
                         } else {
                             // неправда
                             System.out.println("Неравда");
-                            makeLabel(((JTextField)list.get(index).getComponent(2)).getText() + " : " + ((JTextField)list.get(index).getComponent(3)).getText(), false);
                         }
                         break;
                     case "Visible":
                         if((((JTextField)list.get(index).getComponent(3)).getText().compareToIgnoreCase("true") == 0 && ((JButton)component).isVisible() == true) || (((JTextField)list.get(index).getComponent(3)).getText().compareToIgnoreCase("false") == 0 && ((JButton)component).isVisible() == false)) {
                             // правда
                             System.out.println("Правда");
-                            makeLabel(((JTextField)list.get(index).getComponent(2)).getText() + " : " + ((JTextField)list.get(index).getComponent(3)).getText(), true);
                         } else {
                             // неправда
-                            makeLabel(((JTextField)list.get(index).getComponent(2)).getText() + " : " + ((JTextField)list.get(index).getComponent(3)).getText(), false);
                         }
                         break;
                     case "Background":
@@ -45,31 +44,25 @@ public class ActionWithComponent {
                         if(((JButton)component).getBackground().equals(new Color(r, g, b))) {
                             //правда
                             System.out.println("Правда");
-                            makeLabel(((JTextField)list.get(index).getComponent(2)).getText() + " : " + ((JTextField)list.get(index).getComponent(3)).getText(), true);
                         }   else {
                             //неправда
                             System.out.println("Неправда");
-                            makeLabel(((JTextField)list.get(index).getComponent(2)).getText() + " : " + ((JTextField)list.get(index).getComponent(3)).getText(), false);
                         }
                         break;
                     case "Text":
                         if(((JButton)component).getText().compareToIgnoreCase(((JTextField)list.get(index).getComponent(3)).getText()) == 0) {
                             // правда
                             System.out.println("Правда");
-                            makeLabel(((JTextField)list.get(index).getComponent(2)).getText() + " : " + ((JTextField)list.get(index).getComponent(3)).getText(), true);
                         } else {
                             // неправда
-                            makeLabel(((JTextField)list.get(index).getComponent(2)).getText() + " : " + ((JTextField)list.get(index).getComponent(3)).getText(), false);
                         }
                         break;
                     case "Font":
                         if(((JButton)component).getFont().getName().compareToIgnoreCase(((JTextField)list.get(index).getComponent(3)).getText()) == 0) {
                             // правда
                             System.out.println("Правда");
-                            makeLabel(((JTextField)list.get(index).getComponent(2)).getText() + " : " + ((JTextField)list.get(index).getComponent(3)).getText(), true);
                         } else {
                             // неправда
-                            makeLabel(((JTextField)list.get(index).getComponent(2)).getText() + " : " + ((JTextField)list.get(index).getComponent(3)).getText(), false);
                         }
 
                         break;

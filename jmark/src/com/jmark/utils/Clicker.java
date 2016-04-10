@@ -1,5 +1,7 @@
 package com.jmark.utils;
 
+import org.fest.swing.core.ComponentFinder;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,6 +9,7 @@ import java.awt.*;
  * Created by Artyom on 08.04.2016.
  */
 public class Clicker {
+    private ComponentFinder finder;
     private void click(CaptionMatcher matcher) throws Exception {
         Component tmp = null;
         long start = System.currentTimeMillis();
@@ -20,7 +23,8 @@ public class Clicker {
 //                        robot.doubleClick(btn);
 //                        robot.enterText("Do you know it?");
 //                        robot.waitForIdle();
-                actionWithComponent(foundComponent, ((JComboBox) list.get(index).getComponent(0)).getSelectedItem().toString());
+
+                //actionWithComponent(foundComponent, ((JComboBox) list.get(index).getComponent(0)).getSelectedItem().toString());
 
 
                         /*switch (((JComboBox)list.get(index).getComponent(1)).getSelectedItem().toString()) {
