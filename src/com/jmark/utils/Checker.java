@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Artyom on 08.04.2016.
  */
-public class Checker implements Runnable{
+public class Checker implements Runnable {
 
     private Robot robot;
     private ComponentFinder finder;
@@ -32,7 +32,7 @@ public class Checker implements Runnable{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        for(int i = 0; i < testItems.size(); i++) {
+        for (int i = 0; i < testItems.size(); i++) {
             CaptionMatcher matcher = new CaptionMatcher(testItems.get(i).getName(), testItems.get(i).getComponent());
             test(matcher, testItems.get(i));
         }
@@ -41,15 +41,15 @@ public class Checker implements Runnable{
     private void test(CaptionMatcher matcher, TestItem testItem) {
         Component tmp = null;
         long start = System.currentTimeMillis();
-            try {
-                tmp = finder.find(matcher);
+        try {
+            tmp = finder.find(matcher);
 
-                final Component foundComponent = tmp;
-                //robot.moveMouse(tmp);
-                //robot.click(tmp);
+            final Component foundComponent = tmp;
+            //robot.moveMouse(tmp);
+            //robot.click(tmp);
 //                        robot.enterText("Do you know it?");
 //                        robot.waitForIdle();
-                ActionWithComponent.actionWithComponent(foundComponent, testItem);
+            ActionWithComponent.actionWithComponent(foundComponent, testItem);
 
 
                         /*switch (((JComboBox)list.get(index).getComponent(1)).getSelectedItem().toString()) {
@@ -63,10 +63,10 @@ public class Checker implements Runnable{
                                 break;
 
                         }*/
-            } catch (ComponentLookupException e) {
-                System.out.println("There isn't component with this name " + testItem.getName());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        } catch (ComponentLookupException e) {
+            System.out.println("There isn't component with this name " + testItem.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

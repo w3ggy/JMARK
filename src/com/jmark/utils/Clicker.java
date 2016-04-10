@@ -10,6 +10,7 @@ import java.awt.*;
  */
 public class Clicker {
     private ComponentFinder finder;
+
     private void click(CaptionMatcher matcher) throws Exception {
         Component tmp = null;
         long start = System.currentTimeMillis();

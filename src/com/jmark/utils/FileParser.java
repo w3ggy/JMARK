@@ -22,7 +22,7 @@ public class FileParser {
 
     private List<TestItem> testItems = new ArrayList<>();
 
-    public FileParser (File taskFile) {
+    public FileParser(File taskFile) {
         this.taskFile = taskFile;
         parseFile();
     }
@@ -45,7 +45,7 @@ public class FileParser {
             System.out.println(textContent);*/
 
             TestItem testItem;
-            for (int i = 0; i <nList.getLength(); i++) {
+            for (int i = 0; i < nList.getLength(); i++) {
                 Node nNode = nList.item(i);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;

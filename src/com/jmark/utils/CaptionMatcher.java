@@ -27,7 +27,6 @@ public class CaptionMatcher implements ComponentMatcher {
     }
 
 
-
     public void setCaption(String caption) {
         this.caption = caption;
     }

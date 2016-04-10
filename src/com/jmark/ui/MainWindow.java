@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Artyom on 07.04.2016.
  */
-public class MainWindow extends JFrame implements ActionListener{
+public class MainWindow extends JFrame implements ActionListener {
     public MainWindow() {
         super("J-Mark System Configurator");
         JPanel mainPanel = new JPanel();

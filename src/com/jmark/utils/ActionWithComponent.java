@@ -66,7 +66,6 @@ public class ActionWithComponent {
 */
 
 
-
     }
 
     public static void actionWithButton(JButton component, TestItem testItem) {
@@ -88,7 +87,7 @@ public class ActionWithComponent {
             case "Visible":
                 System.out.println("Test № " + testItem.getTestID());
                 if (testItem.getValue().equalsIgnoreCase("true") && component.isVisible() == true ||
-                testItem.getValue().equalsIgnoreCase("false") && component.isVisible() == false) {
+                        testItem.getValue().equalsIgnoreCase("false") && component.isVisible() == false) {
                     System.out.print(" true");
                 } else {
                     System.out.print(" false");
