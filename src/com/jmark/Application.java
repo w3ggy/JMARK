@@ -1,9 +1,11 @@
 package com.jmark;
 
+import com.jmark.ui.MainWindow;
 import com.jmark.utils.Checker;
 import com.jmark.utils.FileParser;
 import com.jmark.utils.TestItem;
 
+import java.awt.*;
 import java.io.File;
 import java.util.List;
 
@@ -30,11 +32,16 @@ public class Application {
         FileParser parser = new FileParser(taskFile);
         testItems = parser.getTestItems();
 
-        System.out.println(testItems);
-        //startChecking();
+        MainWindow window = new MainWindow();
+        System.out.println("asdasdasd " + window.getComponent(0).getName());
+        Component[] componentses = window.getComponents();
+        System.out.println("asdasdasd " + componentses);
+        startChecking();
     }
 
     public static void startChecking() {
-        Checker checker = new Checker(taskFile);
+        Checker checker = new Checker(testItems);
+        Thread thread = new Thread(checker);
+        thread.start();
     }
 }

@@ -18,12 +18,10 @@ public class CaptionMatcher implements ComponentMatcher {
 
     @Override
     public boolean matches(Component comp) {
-
-
         switch (type) {
             case "JButton":
                 if (comp != null) {
-                    if (caption.equals(FindComponentName.getComponentVariableName(comp))) {
+                    if (caption.equals(comp.getName())) {
                         return true;
                     }
                 }
@@ -177,9 +175,7 @@ public class CaptionMatcher implements ComponentMatcher {
                 }
                 break;
 
-
         }
-
         return false;
 
     }
