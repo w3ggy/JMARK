@@ -1,18 +1,30 @@
 package com.jmark.utils;
 
+import com.jmark.constants.SwingTypes;
+import org.fest.swing.core.Robot;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
-import java.util.List;
 
 /**
  * Created by Artyom on 08.04.2016.
  */
 public class ActionWithComponent {
-    public static void actionWithComponent(Component component, TestItem testItem) {
 
+    static Robot actionRobot;
+
+    public static int actionWithComponent(Robot robot, Component component, TestItem testItem) {
+        actionRobot = robot;
         if (component instanceof JButton) {
-            actionWithButton((JButton) component, testItem);
+            return actionWithButton((JButton) component, testItem);
+        } else if (component instanceof JRadioButton) {
+            return actionWithRadioButton((JRadioButton) component, testItem);
+        } else if (component instanceof JCheckBox) {
+            return actionWithCheckbox((JCheckBox) component, testItem);
+        } else if (component instanceof JLabel) {
+            return actionWithLabel((JLabel) component, testItem);
+        } else if (component instanceof JTextField) {
+            return actionWithTextField((JTextField) component, testItem);
         }
 
 
@@ -65,64 +77,338 @@ public class ActionWithComponent {
                 break;
 */
 
-
+        return 0;
     }
 
-    public static void actionWithButton(JButton component, TestItem testItem) {
+    private static Color getColor(TestItem testItem) {
+        Color temp;
+        StringBuffer tmp = new StringBuffer(testItem.getValue());
+        if (tmp.charAt(0) == '#')
+            tmp.deleteCharAt(0);
+        temp = new Color(Integer.parseInt(tmp.substring(0, 2), 16),
+                Integer.parseInt(tmp.substring(2, 4), 16),
+                Integer.parseInt(tmp.substring(4, 6), 16));
+        return temp;
+    }
+
+    public static int actionWithButton(JButton component, TestItem testItem) {
+        Color background;
         switch (testItem.getType()) {
             case "Click":
                 System.out.println("Test № " + testItem.getTestID());
                 System.out.println("Clicked!");
                 component.doClick();
-                break;
+                return SwingTypes.getMark(testItem.getComponent());
             case "Enable":
                 System.out.println("Test № " + testItem.getTestID());
-                if (testItem.getValue().equalsIgnoreCase("true") && component.isEnabled() == true ||
-                        testItem.getValue().equalsIgnoreCase("false") && component.isEnabled() == false) {
-                    System.out.print(" true");
+                if (testItem.getValue().equalsIgnoreCase("true") && component.isEnabled() ||
+                        testItem.getValue().equalsIgnoreCase("false") && !component.isEnabled()) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
                 } else {
-                    System.out.print(" false");
+                    System.out.println("false");
+                    return 0;
                 }
-                break;
             case "Visible":
                 System.out.println("Test № " + testItem.getTestID());
-                if (testItem.getValue().equalsIgnoreCase("true") && component.isVisible() == true ||
-                        testItem.getValue().equalsIgnoreCase("false") && component.isVisible() == false) {
-                    System.out.print(" true");
+                if (testItem.getValue().equalsIgnoreCase("true") && component.isVisible() ||
+                        testItem.getValue().equalsIgnoreCase("false") && !component.isVisible()) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
                 } else {
-                    System.out.print(" false");
+                    System.out.println("false");
+                    return 0;
                 }
-                break;
             case "Background":
                 System.out.println("Test № " + testItem.getTestID());
-                StringBuffer tmp = new StringBuffer(testItem.getValue());
-                if (tmp.charAt(0) == '#')
-                    tmp.deleteCharAt(0);
-                if (component.getBackground().equals(new Color(Integer.parseInt(tmp.substring(0, 2), 16),
-                        Integer.parseInt(tmp.substring(2, 4), 16),
-                        Integer.parseInt(tmp.substring(4, 6), 16)))) {
-                    System.out.print(" true");
+                background = getColor(testItem);
+                if (component.getBackground().equals(background)) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
                 } else {
-                    System.out.print(" false");
+                    System.out.println("false");
+                    return 0;
                 }
-                break;
             case "Text":
                 System.out.println("Test № " + testItem.getTestID());
                 if (component.getText().compareToIgnoreCase(testItem.getValue()) == 0) {
-                    System.out.print(" true");
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
                 } else {
-                    System.out.print(" false");
+                    System.out.println("false");
+                    return 0;
                 }
-                break;
             case "Font":
                 System.out.println("Test № " + testItem.getTestID());
                 if (component.getFont().getName().compareToIgnoreCase(testItem.getValue()) == 0) {
-                    System.out.print(" true");
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
                 } else {
-                    System.out.print(" false");
+                    System.out.println("false");
+                    return 0;
                 }
-                break;
         }
+        return 0;
+    }
+
+    public static int actionWithRadioButton(JRadioButton component, TestItem testItem) {
+        Color background;
+        switch (testItem.getType()) {
+            case "Click":
+                System.out.println("Test № " + testItem.getTestID());
+                System.out.println("Clicked!");
+                component.doClick();
+                return SwingTypes.getMark(testItem.getComponent());
+            case "Enable":
+                System.out.println("Test № " + testItem.getTestID());
+                if (testItem.getValue().equalsIgnoreCase("true") && component.isEnabled() ||
+                        testItem.getValue().equalsIgnoreCase("false") && !component.isEnabled()) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Visible":
+                System.out.println("Test № " + testItem.getTestID());
+                if (testItem.getValue().equalsIgnoreCase("true") && component.isVisible() ||
+                        testItem.getValue().equalsIgnoreCase("false") && !component.isVisible()) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Background":
+                System.out.println("Test № " + testItem.getTestID());
+                background = getColor(testItem);
+                if (component.getBackground().equals(background)) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Text":
+                System.out.println("Test № " + testItem.getTestID());
+                if (component.getText().compareToIgnoreCase(testItem.getValue()) == 0) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Font":
+                System.out.println("Test № " + testItem.getTestID());
+                if (component.getFont().getName().compareToIgnoreCase(testItem.getValue()) == 0) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Foreground":
+                System.out.println("Test № " + testItem.getTestID());
+                background = getColor(testItem);
+                if (component.getForeground().equals(background)) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+        }
+        return 0;
+    }
+
+    public static int actionWithCheckbox(JCheckBox component, TestItem testItem) {
+        Color background;
+        switch (testItem.getType()) {
+            case "Click":
+                System.out.println("Test № " + testItem.getTestID());
+                System.out.println("Clicked!");
+                component.doClick();
+                return SwingTypes.getMark(testItem.getComponent());
+            case "Enable":
+                System.out.println("Test № " + testItem.getTestID());
+                if (testItem.getValue().equalsIgnoreCase("true") && component.isEnabled() ||
+                        testItem.getValue().equalsIgnoreCase("false") && !component.isEnabled()) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Visible":
+                System.out.println("Test № " + testItem.getTestID());
+                if (testItem.getValue().equalsIgnoreCase("true") && component.isVisible() ||
+                        testItem.getValue().equalsIgnoreCase("false") && !component.isVisible()) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Background":
+                System.out.println("Test № " + testItem.getTestID());
+                background = getColor(testItem);
+                if (component.getBackground().equals(background)) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Text":
+                System.out.println("Test № " + testItem.getTestID());
+                if (component.getText().compareToIgnoreCase(testItem.getValue()) == 0) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Font":
+                System.out.println("Test № " + testItem.getTestID());
+                if (component.getFont().getName().compareToIgnoreCase(testItem.getValue()) == 0) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Foreground":
+                System.out.println("Test № " + testItem.getTestID());
+                background = getColor(testItem);
+                if (component.getForeground().equals(background)) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+        }
+        return 0;
+    }
+
+    public static int actionWithLabel(JLabel component, TestItem testItem) {
+        Color background;
+        switch (testItem.getType()) {
+            case "Click":
+                System.out.println("Test № " + testItem.getTestID());
+                System.out.println("Clicked!");
+                actionRobot.click(component);
+                return SwingTypes.getMark(testItem.getComponent());
+            case "Enable":
+                System.out.println("Test № " + testItem.getTestID());
+                if (testItem.getValue().equalsIgnoreCase("true") && component.isEnabled() ||
+                        testItem.getValue().equalsIgnoreCase("false") && !component.isEnabled()) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Visible":
+                System.out.println("Test № " + testItem.getTestID());
+                if (testItem.getValue().equalsIgnoreCase("true") && component.isVisible() ||
+                        testItem.getValue().equalsIgnoreCase("false") && !component.isVisible()) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Text":
+                System.out.println("Test № " + testItem.getTestID());
+                if (component.getText().compareToIgnoreCase(testItem.getValue()) == 0) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Font":
+                System.out.println("Test № " + testItem.getTestID());
+                if (component.getFont().getName().compareToIgnoreCase(testItem.getValue()) == 0) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+        }
+        return 0;
+    }
+
+    public static int actionWithTextField(JTextField component, TestItem testItem) {
+        Color background;
+        switch (testItem.getType()) {
+            case "Click":
+                System.out.println("Test № " + testItem.getTestID());
+                System.out.println("Clicked!");
+                actionRobot.click(component);
+                return SwingTypes.getMark(testItem.getComponent());
+            case "Enable":
+                System.out.println("Test № " + testItem.getTestID());
+                if (testItem.getValue().equalsIgnoreCase("true") && component.isEnabled() ||
+                        testItem.getValue().equalsIgnoreCase("false") && !component.isEnabled()) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Visible":
+                System.out.println("Test № " + testItem.getTestID());
+                if (testItem.getValue().equalsIgnoreCase("true") && component.isVisible() ||
+                        testItem.getValue().equalsIgnoreCase("false") && !component.isVisible()) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Background":
+                System.out.println("Test № " + testItem.getTestID());
+                background = getColor(testItem);
+                if (component.getBackground().equals(background)) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Text":
+                System.out.println("Test № " + testItem.getTestID());
+                if (component.getText().compareToIgnoreCase(testItem.getValue()) == 0) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Font":
+                System.out.println("Test № " + testItem.getTestID());
+                if (component.getFont().getName().compareToIgnoreCase(testItem.getValue()) == 0) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Foreground":
+                System.out.println("Test № " + testItem.getTestID());
+                background = getColor(testItem);
+                if (component.getForeground().equals(background)) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+        }
+        return 0;
     }
 
 }

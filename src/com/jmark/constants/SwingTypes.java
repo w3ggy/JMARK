@@ -7,30 +7,55 @@ import java.util.Arrays;
  */
 public class SwingTypes {
 
-    public static final int JBUTTON = 0;
-    public static final int JRADIOBUTTON = 1;
-    public static final int JCHECKBOX = 2;
-    public static final int JLABEL = 3;
-    public static final int JTEXTFIELD = 4;
-    public static final int JPASSWORDFIELD = 5;
-    public static final int JFORMATTEDTEXTFIELD = 6;
-    public static final int JTEXTAREA = 7;
-    public static final int JTEXTPANE = 8;
-    public static final int JEDITORPANE = 9;
-    public static final int JTABLE = 10;
-    public static final int JLIST = 11;
-    public static final int JTREE = 12;
-    public static final int JTABBEDPANE = 13;
-    public static final int JSPITPANE = 14;
-    public static final int JSPINNER = 15;
-    public static final int JSLIDER = 16;
-    public static final int JSEPARATOR = 17;
-    public static final int JPROGRESSBAR = 18;
-    public static final int JTOOLBAR = 19;
-    public static final int JSCROLLPANE = 20;
-    public static final int JSCROLLBAR = 21;
+    public static final String JBUTTON = "JButton";
+    public static final String JRADIOBUTTON = "JRadioButton";
+    public static final String JCHECKBOX = "JCheckBox";
+    public static final String JLABEL = "JLabel";
+    public static final String JTEXTFIELD = "JTextField";
+    public static final String JPASSWORDFIELD = "JPasswordField";
+    public static final String JFORMATTEDTEXTFIELD = "JFormattedTextField";
+    public static final String JTEXTAREA = "JTextArea";
+    public static final String JTEXTPANE = "JTextPane";
+    public static final String JEDITORPANE = "JEditorPane";
+    public static final String JTABLE = "JTable";
+    public static final String JLIST = "JList";
+    public static final String JTREE = "JTree";
+    public static final String JTABBEDPANE = "JTabbedPane";
+    public static final String JSPLITPANE = "JSplitPane";
+    public static final String JSPINNER = "JSpinner";
+    public static final String JSLIDER = "JSlider";
+    public static final String JSEPARATOR = "JSeparator";
+    public static final String JPROGRESSBAR = "JProgressBar";
+    public static final String JTOOLBAR = "JToolBar";
+    public static final String JSCROLLPANE = "JScrollBar";
+    public static final String JSCROLLBAR = "JScrollPane";
 
-    private static String[] returnActions(int type) {
+    private static String[] swingTypes = {
+            "JButton",
+            "JRadioButton",
+            "JCheckBox",
+            "JLabel",
+            "JTextField",
+            "JPasswordField",
+            "JFormattedTextField",
+            "JTextArea",
+            "JTextPane",
+            "JEditorPane",
+            "JComboBox",
+            "JTable",
+            "JList",
+            "JTree",
+            "JTabbedPane",
+            "JSplitPane",
+            "JSpinner",
+            "JSlider",
+            "JSeparator",
+            "JProgressBar",
+            "JToolBar",
+            "JScrollBar",
+            "JScrollPane"};
+
+    private static String[] returnActions(String type) {
         switch (type) {
             case JBUTTON: {
                 return new String[]{"Click", "Enable", "Visible", "Background", "Text", "Font", "Action"};
@@ -74,7 +99,7 @@ public class SwingTypes {
             case JTABBEDPANE: {
                 return new String[]{"Click", "Enable", "Visible", "Text", "Font", "Action"};
             }
-            case JSPITPANE: {
+            case JSPLITPANE: {
                 return new String[]{"Find", "Enable", "Visible"};
             }
             case JSPINNER: {
@@ -102,30 +127,77 @@ public class SwingTypes {
         return new String[0];
     }
 
-    private static String[] swingTypes = {
-            "JButton",
-            "JRadioButton",
-            "JCheckBox",
-            "JLabel",
-            "JTextField",
-            "JPasswordField",
-            "JFormattedTextField",
-            "JTextArea",
-            "JTextPane",
-            "JEditorPane",
-            "JComboBox",
-            "JTable",
-            "JList",
-            "JTree",
-            "JTabbedPane",
-            "JSplitPane",
-            "JSpinner",
-            "JSlider",
-            "JSeparator",
-            "JProgressBar",
-            "JToolBar",
-            "JScrollBar",
-            "JScrollPane"};
+    public static int getMark(String type) {
+        switch (type) {
+            case JBUTTON: {
+                return 5;
+            }
+            case JRADIOBUTTON: {
+                return 3;
+            }
+            case JCHECKBOX: {
+                return 3;
+            }
+            case JLABEL: {
+                return 5;
+            }
+            case JTEXTFIELD: {
+                return 5;
+            }
+            case JPASSWORDFIELD: {
+                return 6;
+            }
+            case JFORMATTEDTEXTFIELD: {
+                return 7;
+            }
+            case JTEXTAREA: {
+                return 7;
+            }
+            case JTEXTPANE: {
+                return 7;
+            }
+            case JEDITORPANE: {
+                return 10;
+            }
+            case JTABLE: {
+                return 5;
+            }
+            case JLIST: {
+                return 5;
+            }
+            case JTREE: {
+                return 5;
+            }
+            case JTABBEDPANE: {
+                return 3;
+            }
+            case JSPLITPANE: {
+                return 3;
+            }
+            case JSPINNER: {
+                return 3;
+            }
+            case JSLIDER: {
+                return 3;
+            }
+            case JSEPARATOR: {
+                return 1;
+            }
+            case JPROGRESSBAR: {
+                return 2;
+            }
+            case JTOOLBAR: {
+                return 5;
+            }
+            case JSCROLLPANE: {
+                return 7;
+            }
+            case JSCROLLBAR: {
+                return 5;
+            }
+        }
+        return 0;
+    }
 
     public static boolean containsType(String type) {
         for (String temp : swingTypes) {

@@ -33,9 +33,6 @@ public class Application {
         testItems = parser.getTestItems();
 
         MainWindow window = new MainWindow();
-        System.out.println("asdasdasd " + window.getComponent(0).getName());
-        Component[] componentses = window.getComponents();
-        System.out.println("asdasdasd " + componentses);
         startChecking();
     }
 

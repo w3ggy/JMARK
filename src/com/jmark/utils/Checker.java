@@ -1,5 +1,6 @@
 package com.jmark.utils;
 
+import com.jmark.constants.SwingTypes;
 import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.ComponentFinder;
 import org.fest.swing.core.Robot;
@@ -17,6 +18,8 @@ public class Checker implements Runnable {
     private Robot robot;
     private ComponentFinder finder;
     private List<TestItem> testItems;
+    private int resultEstimate;
+    private int currentEstimate;
 
     public Checker(List<TestItem> testItems) {
         robot = BasicRobot.robotWithCurrentAwtHierarchy();
@@ -27,6 +30,8 @@ public class Checker implements Runnable {
 
     @Override
     public void run() {
+        System.out.println("STARTING CHECKING");
+        System.out.println("=======================================");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -36,20 +41,22 @@ public class Checker implements Runnable {
             CaptionMatcher matcher = new CaptionMatcher(testItems.get(i).getName(), testItems.get(i).getComponent());
             test(matcher, testItems.get(i));
         }
+        System.out.println("=======================================");
+        afterChecking();
     }
 
     private void test(CaptionMatcher matcher, TestItem testItem) {
-        Component tmp = null;
-        long start = System.currentTimeMillis();
+        Component tmp;
         try {
+            resultEstimate += SwingTypes.getMark(testItem.getComponent());
             tmp = finder.find(matcher);
 
             final Component foundComponent = tmp;
             //robot.moveMouse(tmp);
             //robot.click(tmp);
-//                        robot.enterText("Do you know it?");
-//                        robot.waitForIdle();
-            ActionWithComponent.actionWithComponent(foundComponent, testItem);
+//            robot.enterText("Do you know it?");
+//            robot.waitForIdle();
+            currentEstimate += ActionWithComponent.actionWithComponent(robot, foundComponent, testItem);
 
 
                         /*switch (((JComboBox)list.get(index).getComponent(1)).getSelectedItem().toString()) {
@@ -64,9 +71,18 @@ public class Checker implements Runnable {
 
                         }*/
         } catch (ComponentLookupException e) {
-            System.out.println("There isn't component with this name " + testItem.getName());
+            System.out.println("Test № " + testItem.getTestID());
+            System.out.println("false");
+            System.out.println("There isn't component with this name: " + testItem.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void afterChecking() {
+        System.out.println();
+        System.out.println("Итоговая оценка: " +
+                currentEstimate + " / " + resultEstimate +
+                "\n" + 100 * currentEstimate / resultEstimate + "%");
     }
 }
