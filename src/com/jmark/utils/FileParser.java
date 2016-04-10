@@ -87,6 +87,7 @@ public class FileParser {
                             .getElementsByTagName("value")
                             .item(0)
                             .getTextContent());
+                    System.out.println();
 
                 }
             }
