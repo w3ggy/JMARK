@@ -32,12 +32,9 @@ public class Checker implements Runnable {
     public void run() {
         System.out.println("STARTING CHECKING");
         System.out.println("=======================================");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleepThread(1000);
         for (int i = 0; i < testItems.size(); i++) {
+            sleepThread(100);
             CaptionMatcher matcher = new CaptionMatcher(testItems.get(i).getName(), testItems.get(i).getComponent());
             test(matcher, testItems.get(i));
         }
@@ -57,19 +54,6 @@ public class Checker implements Runnable {
 //            robot.enterText("Do you know it?");
 //            robot.waitForIdle();
             currentEstimate += ActionWithComponent.actionWithComponent(robot, foundComponent, testItem);
-
-
-                        /*switch (((JComboBox)list.get(index).getComponent(1)).getSelectedItem().toString()) {
-                            case "SetText":
-                                ((JButton)foundComponent).setText(((JTextField)list.get(index).getComponent(3)).getText());
-                                break;
-
-                            case "Click":
-                                //robot.moveMouse(btn);
-                                ((JButton)foundComponent).doClick();
-                                break;
-
-                        }*/
         } catch (ComponentLookupException e) {
             System.out.println("Test № " + testItem.getTestID());
             System.out.println("false");
@@ -84,5 +68,13 @@ public class Checker implements Runnable {
         System.out.println("Итоговая оценка: " +
                 currentEstimate + " / " + resultEstimate +
                 "\n" + 100 * currentEstimate / resultEstimate + "%");
+    }
+
+    private void sleepThread(int N) {
+        try {
+            Thread.sleep(N);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
