@@ -11,7 +11,7 @@ import java.util.List;
 public class ActionWithComponent {
     static List<JPanel> list = new ArrayList<>();
     static int index = 0;
-    public static void actionWithComponent(Component component) {
+    public static void actionWithComponent(Component component, TestItem testItem) {
 
         if (component instanceof JButton) {
             switch (((JComboBox)list.get(index).getComponent(1)).getSelectedItem().toString()) {

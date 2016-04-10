@@ -28,11 +28,16 @@ public class Checker implements Runnable{
     public void run() {
         for(int i = 0; i < testItems.size(); i++) {
             CaptionMatcher matcher = new CaptionMatcher(testItems.get(i).getName(), testItems.get(i).getComponent());
-            test(matcher);
+            test(matcher, testItems.get(i));
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    private void test(CaptionMatcher matcher) {
+    private void test(CaptionMatcher matcher, TestItem testItem) {
         Component tmp = null;
         long start = System.currentTimeMillis();
 
@@ -42,10 +47,10 @@ public class Checker implements Runnable{
 
                 final Component foundComponent = tmp;
                         robot.moveMouse(tmp);
-//                        robot.doubleClick(btn);
+                        robot.click(tmp);
 //                        robot.enterText("Do you know it?");
 //                        robot.waitForIdle();
-                //ActionWithComponent.actionWithComponent(foundComponent);
+                ActionWithComponent.actionWithComponent(foundComponent, testItem);
 
 
                         /*switch (((JComboBox)list.get(index).getComponent(1)).getSelectedItem().toString()) {
@@ -59,6 +64,7 @@ public class Checker implements Runnable{
                                 break;
 
                         }*/
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

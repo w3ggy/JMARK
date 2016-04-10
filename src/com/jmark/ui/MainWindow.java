@@ -21,10 +21,8 @@ public class MainWindow extends JFrame implements ActionListener{
         start.setName("start");
         stop.setName("stop");
 
-        System.out.println("Как же??? " + FindComponentName.getComponentVariableName(start));
-
-
         start.addActionListener(this);
+        stop.addActionListener(this);
         mainPanel.add(start);
         mainPanel.add(stop);
         setContentPane(mainPanel);
@@ -40,6 +38,9 @@ public class MainWindow extends JFrame implements ActionListener{
         switch (e.getActionCommand()) {
             case "Start":
                 System.out.println("Starting!");
+                break;
+            case "Stop":
+                System.out.println("Stoping!");
                 break;
             default:
                 break;
