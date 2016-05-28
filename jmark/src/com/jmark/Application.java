@@ -1,5 +1,6 @@
 package com.jmark;
 
+import com.jmark.ui.MainWindow;
 import com.jmark.utils.Checker;
 import com.jmark.utils.FileParser;
 import com.jmark.utils.TestItem;
@@ -30,11 +31,14 @@ public class Application {
         FileParser parser = new FileParser(taskFile);
         testItems = parser.getTestItems();
 
-        System.out.println(testItems);
-        //startChecking();
+        MainWindow window = new MainWindow();
+
+        startChecking();
     }
 
     public static void startChecking() {
-        Checker checker = new Checker(taskFile);
+        Checker checker = new Checker(testItems);
+        Thread thread = new Thread(checker);
+        thread.start();
     }
 }

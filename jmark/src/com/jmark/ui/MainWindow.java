@@ -9,11 +9,7 @@ import java.awt.event.ActionListener;
  * Created by Artyom on 07.04.2016.
  */
 public class MainWindow extends JFrame implements ActionListener{
-
-
-
     public MainWindow() {
-
         super("J-Mark System Configurator");
         JPanel mainPanel = new JPanel();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,10 +19,6 @@ public class MainWindow extends JFrame implements ActionListener{
         setContentPane(mainPanel);
         setVisible(true);
         setSize(new Dimension(500, 500));
-    }
-
-    public static void main(String[] args) {
-        MainWindow window = new MainWindow();
     }
 
     @Override

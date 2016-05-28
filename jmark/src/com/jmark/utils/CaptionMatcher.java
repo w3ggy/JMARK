@@ -18,8 +18,6 @@ public class CaptionMatcher implements ComponentMatcher {
 
     @Override
     public boolean matches(Component comp) {
-
-
         switch (type) {
             case "JButton":
                 if (comp != null) {
@@ -177,9 +175,7 @@ public class CaptionMatcher implements ComponentMatcher {
                 }
                 break;
 
-
         }
-
         return false;
 
     }
