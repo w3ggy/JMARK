@@ -1,11 +1,13 @@
 package com.jmark.utils;
 
+import com.jmark.Application;
 import com.jmark.constants.SwingTypes;
 import org.fest.swing.core.BasicRobot;
 import org.fest.swing.core.ComponentFinder;
 import org.fest.swing.core.Robot;
 import org.fest.swing.exception.ComponentLookupException;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.List;
@@ -32,12 +34,13 @@ public class Checker implements Runnable {
     public void run() {
         System.out.println("STARTING CHECKING");
         System.out.println("=======================================");
-        sleepThread(1000);
+        long startCheckingTime = System.currentTimeMillis();
         for (int i = 0; i < testItems.size(); i++) {
-            sleepThread(100);
             CaptionMatcher matcher = new CaptionMatcher(testItems.get(i).getName(), testItems.get(i).getComponent());
             test(matcher, testItems.get(i));
         }
+        long endTime = System.currentTimeMillis();
+        System.out.println(String.format("Checking task time is %d", endTime - startCheckingTime));
         System.out.println("=======================================");
         afterChecking();
     }
@@ -47,13 +50,7 @@ public class Checker implements Runnable {
         try {
             resultEstimate += SwingTypes.getMark(testItem.getComponent());
             tmp = finder.find(matcher);
-
-            final Component foundComponent = tmp;
-            //robot.moveMouse(tmp);
-            //robot.click(tmp);
-//            robot.enterText("Do you know it?");
-//            robot.waitForIdle();
-            currentEstimate += ActionWithComponent.actionWithComponent(robot, foundComponent, testItem);
+            robot.click(tmp);
         } catch (ComponentLookupException e) {
             System.out.println("Test № " + testItem.getTestID());
             System.out.println("false");
@@ -68,13 +65,5 @@ public class Checker implements Runnable {
         System.out.println("Итоговая оценка: " +
                 currentEstimate + " / " + resultEstimate +
                 "\n" + 100 * currentEstimate / resultEstimate + "%");
-    }
-
-    private void sleepThread(int N) {
-        try {
-            Thread.sleep(N);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

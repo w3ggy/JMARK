@@ -29,6 +29,7 @@ public class SwingTypes {
     public static final String JTOOLBAR = "JToolBar";
     public static final String JSCROLLPANE = "JScrollBar";
     public static final String JSCROLLBAR = "JScrollPane";
+    public static final String JPANEL = "JPanel";
 
     private static String[] swingTypes = {
             "JButton",
@@ -53,7 +54,8 @@ public class SwingTypes {
             "JProgressBar",
             "JToolBar",
             "JScrollBar",
-            "JScrollPane"};
+            "JScrollPane",
+            "JPanel"};
 
     private static String[] returnActions(String type) {
         switch (type) {
@@ -121,6 +123,9 @@ public class SwingTypes {
                 return new String[]{"Find"};
             }
             case JSCROLLBAR: {
+                return new String[]{"Find", "Enable", "Visible", "Background", "Text", "Font", "Action"};
+            }
+            case JPANEL: {
                 return new String[]{"Find", "Enable", "Visible", "Background", "Text", "Font", "Action"};
             }
         }
@@ -194,6 +199,9 @@ public class SwingTypes {
             }
             case JSCROLLBAR: {
                 return 5;
+            }
+            case JPANEL: {
+                return 15;
             }
         }
         return 0;

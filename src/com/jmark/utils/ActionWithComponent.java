@@ -25,6 +25,8 @@ public class ActionWithComponent {
             return actionWithLabel((JLabel) component, testItem);
         } else if (component instanceof JTextField) {
             return actionWithTextField((JTextField) component, testItem);
+        } else if (component instanceof JPanel) {
+            return actionWithPanel((JPanel) component, testItem);
         }
 
 
@@ -328,6 +330,16 @@ public class ActionWithComponent {
                     System.out.println("false");
                     return 0;
                 }
+            case "Background":
+                System.out.println("Test № " + testItem.getTestID());
+                background = getColor(testItem);
+                if (new Color(component.getForeground().getRGB()).equals(background)) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
             case "Font":
                 System.out.println("Test № " + testItem.getTestID());
                 if (component.getFont().getName().compareToIgnoreCase(testItem.getValue()) == 0) {
@@ -382,6 +394,67 @@ public class ActionWithComponent {
             case "Text":
                 System.out.println("Test № " + testItem.getTestID());
                 if (component.getText().compareToIgnoreCase(testItem.getValue()) == 0) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Font":
+                System.out.println("Test № " + testItem.getTestID());
+                if (component.getFont().getName().compareToIgnoreCase(testItem.getValue()) == 0) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Foreground":
+                System.out.println("Test № " + testItem.getTestID());
+                background = getColor(testItem);
+                if (component.getForeground().equals(background)) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+        }
+        return 0;
+    }
+
+    public static int actionWithPanel(JPanel component, TestItem testItem) {
+        Color background;
+        switch (testItem.getType()) {
+            case "Click":
+                System.out.println("Test № " + testItem.getTestID());
+                System.out.println("Clicked!");
+                actionRobot.click(component);
+                return SwingTypes.getMark(testItem.getComponent());
+            case "Enable":
+                System.out.println("Test № " + testItem.getTestID());
+                if (testItem.getValue().equalsIgnoreCase("true") && component.isEnabled() ||
+                        testItem.getValue().equalsIgnoreCase("false") && !component.isEnabled()) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Visible":
+                System.out.println("Test № " + testItem.getTestID());
+                if (testItem.getValue().equalsIgnoreCase("true") && component.isVisible() ||
+                        testItem.getValue().equalsIgnoreCase("false") && !component.isVisible()) {
+                    System.out.println("true");
+                    return SwingTypes.getMark(testItem.getComponent());
+                } else {
+                    System.out.println("false");
+                    return 0;
+                }
+            case "Background":
+                System.out.println("Test № " + testItem.getTestID());
+                background = getColor(testItem);
+                if (component.getBackground().equals(background)) {
                     System.out.println("true");
                     return SwingTypes.getMark(testItem.getComponent());
                 } else {
