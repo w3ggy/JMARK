@@ -1,11 +1,12 @@
 package com.jmark;
 
 import com.jmark.ui.MainWindow;
-import com.jmark.utils.Checker;
+import com.jmark.utils.checker.Checker;
 import com.jmark.utils.FileParser;
 import com.jmark.utils.TestItem;
+import com.jmark.utils.logger.Logger;
+import sun.rmi.runtime.Log;
 
-import java.awt.*;
 import java.io.File;
 import java.util.List;
 
@@ -16,10 +17,13 @@ public class Application {
 
     private static File taskFile;
     private static List<TestItem> testItems;
+    private static Logger logger = Logger.getInstance();
 
     public static void main(String[] args) {
+        logger.userAuthorized(); //TODO Remove this before release
+
         args = new String[1];
-        args[0] = "e:\\Diplom\\tasks.xml";
+        args[0] = "tasks.xml";
         if (args.length != 1) {
             System.out.println("There isn't file!");
             System.exit(-1);
